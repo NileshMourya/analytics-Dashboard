@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setColorTheme, setColorValue } from "../store/excelSlice";
 import { AiFillDashboard } from "react-icons/ai";
 import { FiUpload } from "react-icons/fi";
-import { FaClipboardList } from "react-icons/fa6";
+import { FaPencilAlt } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 
 const SideBar = ({ open, setOpen }) => {
@@ -17,10 +17,26 @@ const SideBar = ({ open, setOpen }) => {
   const pathname = usePathname();
 
   const navigation = [
-    { name: "Dashboard", links: "/", icon: <AiFillDashboard size={17} /> },
-    { name: "Uploads", links: "/uploads", icon: <FiUpload size={17} /> },
-    { name: "Tables", links: "/tables", icon: <FaClipboardList size={17} /> },
-    { name: "Description", links: "/Des", icon: <CgProfile size={17} /> },
+    {
+      name: "Dashboard",
+      links: "/",
+      icon: <AiFillDashboard size={17} color="white" />,
+    },
+    {
+      name: "Uploads",
+      links: "/uploads",
+      icon: <FiUpload size={17} color="white" />,
+    },
+    {
+      name: "Description",
+      links: "/Des",
+      icon: <FaPencilAlt size={17} color="white" />,
+    },
+    {
+      name: "Profile",
+      links: "/profile",
+      icon: <CgProfile size={17} color="white" />,
+    },
   ];
 
   // Normalize paths for reliable matching
@@ -99,13 +115,14 @@ const SideBar = ({ open, setOpen }) => {
           className={`relative px-3 w-64 py-4 drop-shadow-md overflow-y-auto h-[93%] bg-white rounded-xl dark:bg-gray-800`}
         >
           {/* Logo */}
-          <div className="w-full h-24 flex items-end">
+          <div className="w-full h-18 flex items-end">
             <Image
               src="/analytics.png"
               alt="data analytics"
-              width={60}
-              height={50}
+              width={40}
+              height={40}
             />
+            <p className="p-2">Dashboard Analytics</p>
           </div>
 
           {/* Divider */}

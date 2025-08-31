@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteDB, getExcelData } from "./utils/db";
 import { setExcelData, setTableContent, groupByMake } from "./store/excelSlice";
 import { useEffect, useState } from "react";
-import { FaCar } from "react-icons/fa";
 import Tables from "./components/Tables";
 import Cards from "./components/Cards";
-import { useCheckExcelData } from "@/app/utils/db";
 import { useRouter } from "next/navigation";
+import Loader from "@/app/components/Loader";
 
 export default function Dashboard() {
   const { excelData } = useSelector((state) => state.excel);
@@ -47,11 +46,7 @@ export default function Dashboard() {
   }, []);
 
   if (loader) {
-    return (
-      <div className="w-full h-screen p-4 bg-white flex justify-center items-center">
-        <div className="animate-spin h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent"></div>
-      </div>
-    );
+    return <Loader />;
   }
   return (
     <>

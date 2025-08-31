@@ -3,6 +3,7 @@ import Highcharts from "highcharts";
 import { color } from "../utils/colorScheme";
 import { useSelector } from "react-redux";
 import { FaClipboardList } from "react-icons/fa6";
+import Loader from "./Loader";
 
 const Chart = ({ table }) => {
   const { tableContent, colorTheme } = useSelector((state) => state.excel);
@@ -114,11 +115,7 @@ const Chart = ({ table }) => {
     }
   }, [chartData]);
 
-  return (
-    <>
-      <div ref={chartComponent} />
-    </>
-  );
+  return <>{chartData ? <div ref={chartComponent} /> : <Loader />}</>;
 };
 
 export default Chart;

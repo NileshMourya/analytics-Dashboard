@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import Highcharts from "highcharts";
 import { color } from "../utils/colorScheme";
 import { useSelector } from "react-redux";
+import Loader from "./Loader";
 
 const SummaryChart = () => {
   const { summary } = useSelector((state) => state.excel);
@@ -109,7 +110,7 @@ const SummaryChart = () => {
     }
   }, [summaryData]);
 
-  return <div ref={chartComponent} />;
+  return <>{summaryData ? <div ref={chartComponent} /> : <Loader />}</>;
 };
 
 export default SummaryChart;
