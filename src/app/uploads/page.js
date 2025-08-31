@@ -4,16 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { parseExcelFile, setExcelData } from "../store/excelSlice";
 import toast from "react-hot-toast";
 import { GiCloudUpload } from "react-icons/gi";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const dispatch = useDispatch();
-  const { colorTheme } = useSelector((state) => state.excel);
+  const { colorTheme, error } = useSelector((state) => state.excel);
+  const router = useRouter();
 
   const handleFileChange = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       dispatch(parseExcelFile(uploadedFile));
       toast.success("File uploaded successfully");
+      if (!error) {
+        router.push("/");
+      }
     }
   };
 

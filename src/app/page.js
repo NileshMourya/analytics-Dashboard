@@ -50,19 +50,22 @@ export default function Dashboard() {
   }
   return (
     <>
-      <div className="bg-[#f0f2f5] p-4 relative">
-        <div
-          className={`w-[79%] p-4 fixed top-2 z-50 border border-white 
+      {excelData && (
+        <div className="bg-[#f0f2f5] p-4 relative">
+          <div
+            className={`w-[79%] p-4 fixed top-2 z-50 border border-white 
         backdrop-blur-md bg-white/10 shadow-sm rounded-md 
         transition-all duration-300
         ${showNav ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5"}
       `}
-        >
-          <p className="text-gray-700">Electric Vehicle Population Data</p>
+          >
+            <p className="text-gray-700">Electric Vehicle Population Data</p>
+          </div>
+          <Cards />
+          <Tables />
         </div>
-        <Cards />
-        <Tables />
-      </div>
+      )}
+      {/* <button onClick={deleteDB}>delete</button> */}
     </>
   );
 }

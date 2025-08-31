@@ -115,15 +115,17 @@ const SideBar = ({ open, setOpen }) => {
           className={`relative px-3 w-64 py-4 drop-shadow-md overflow-y-auto h-[93%] bg-white rounded-xl dark:bg-gray-800`}
         >
           {/* Logo */}
-          <div className="w-full h-18 flex items-end">
-            <Image
-              src="/analytics.png"
-              alt="data analytics"
-              width={40}
-              height={40}
-            />
-            <p className="p-2">Dashboard Analytics</p>
-          </div>
+          <Link href="/">
+            <div className="w-full h-18 flex items-end">
+              <Image
+                src="/analytics.png"
+                alt="data analytics"
+                width={40}
+                height={40}
+              />
+              <p className="p-2">Dashboard Analytics</p>
+            </div>
+          </Link>
 
           {/* Divider */}
           <div className="h-px bg-[linear-gradient(to_right,rgba(52,71,103,0),rgba(52,71,103,0.4),rgba(52,71,103,0))] mt-5 mb-5" />

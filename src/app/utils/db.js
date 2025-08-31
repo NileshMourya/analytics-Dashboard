@@ -1,5 +1,5 @@
 import { openDB } from "idb";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
@@ -17,6 +17,7 @@ export const saveExcelData = async (key, data) => {
   const db = await initDB();
   await db.put("files", data, key);
   toast.success("Data save successfully");
+  window.location.reload();
 };
 
 export const getExcelData = async (key) => {

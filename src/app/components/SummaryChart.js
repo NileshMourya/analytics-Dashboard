@@ -8,8 +8,8 @@ const SummaryChart = () => {
   const { summary } = useSelector((state) => state.excel);
 
   const summaryData = useMemo(() => {
-    const total = summary.reduce((sum, item) => sum + item.count, 0);
-    return summary.map((item) => ({
+    const total = summary?.reduce((sum, item) => sum + item.count, 0);
+    return summary?.map((item) => ({
       name: item.make,
       y: (item.count / total) * 100, // percentage
     }));
@@ -59,7 +59,7 @@ const SummaryChart = () => {
 
         series: [
           {
-            data: summaryData.map((item) => ({
+            data: summaryData?.map((item) => ({
               name: item.name,
               y: item.y,
             })),

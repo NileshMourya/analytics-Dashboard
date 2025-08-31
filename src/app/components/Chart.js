@@ -14,7 +14,7 @@ const Chart = ({ table }) => {
     });
 
     // Convert to chart data format
-    return Object.keys(cityCounts).map((city) => ({
+    return Object.keys(cityCounts)?.map((city) => ({
       name: city,
       value: cityCounts[city],
     }));
@@ -64,7 +64,7 @@ const Chart = ({ table }) => {
 
         series: [
           {
-            data: chartData.map((item) => ({
+            data: chartData?.map((item) => ({
               name: item.name,
               y: item.value,
             })),
