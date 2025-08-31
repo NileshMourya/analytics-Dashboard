@@ -12,6 +12,7 @@ const initialState = {
   groupData: null,
   summary: null,
   colorTheme: null,
+  colorValue: null,
 };
 
 const excelSlice = createSlice({
@@ -48,6 +49,9 @@ const excelSlice = createSlice({
     setColorTheme(state, action) {
       state.colorTheme = action.payload;
     },
+    setColorValue(state, action) {
+      state.colorValue = action.payload;
+    },
   },
 });
 
@@ -61,6 +65,7 @@ export const {
   setGroupData,
   setSummary,
   setColorTheme,
+  setColorValue,
 } = excelSlice.actions;
 export default excelSlice.reducer;
 

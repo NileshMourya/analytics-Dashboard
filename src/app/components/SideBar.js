@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setColorTheme } from "../store/excelSlice";
+import { setColorTheme, setColorValue } from "../store/excelSlice";
 import { AiFillDashboard } from "react-icons/ai";
 import { FiUpload } from "react-icons/fi";
 import { FaClipboardList } from "react-icons/fa6";
@@ -13,14 +13,14 @@ import { CgProfile } from "react-icons/cg";
 
 const SideBar = ({ open, setOpen }) => {
   const dispatch = useDispatch();
-  const { colorTheme } = useSelector((state) => state.excel);
+  const { colorTheme, colorValue } = useSelector((state) => state.excel);
   const pathname = usePathname();
 
   const navigation = [
     { name: "Dashboard", links: "/", icon: <AiFillDashboard size={17} /> },
     { name: "Uploads", links: "/uploads", icon: <FiUpload size={17} /> },
     { name: "Tables", links: "/tables", icon: <FaClipboardList size={17} /> },
-    { name: "Profile", links: "/profile", icon: <CgProfile size={17} /> },
+    { name: "Description", links: "/Des", icon: <CgProfile size={17} /> },
   ];
 
   // Normalize paths for reliable matching
@@ -37,25 +37,31 @@ const SideBar = ({ open, setOpen }) => {
     return a === b || a.startsWith(b + "/");
   };
 
-  // Gradient per theme (ensure bg-gradient-to-br is included)
-  let gradient = "bg-gradient-to-br from-[#49a3f1] to-[#1A73E8]";
-  switch (colorTheme) {
-    case "blue":
-      gradient = "bg-gradient-to-br from-[#49a3f1] to-[#1A73E8]";
-      break;
-    case "pink":
-      gradient = "bg-gradient-to-br from-[#f093fb] to-[#f5576c]";
-      break;
-    case "green":
-      gradient = "bg-gradient-to-br from-[#43e97b] to-[#38f9d7]";
-      break;
-    case "yellow":
-      gradient = "bg-gradient-to-br from-[#fa709a] to-[#fee140]";
-      break;
-    case "darkBlue":
-      gradient = "bg-gradient-to-br from-[#30cfd0] to-[#330867]";
-      break;
-  }
+  useEffect(() => {
+    let gradient = "bg-gradient-to-br from-[#49a3f1] to-[#1A73E8]";
+    switch (colorValue) {
+      case "blue":
+        gradient = "bg-gradient-to-br from-[#49a3f1] to-[#1A73E8]";
+        break;
+      case "pink":
+        gradient = "bg-gradient-to-br from-[#f093fb] to-[#f5576c]";
+
+        break;
+      case "green":
+        gradient = "bg-gradient-to-br from-[#43e97b] to-[#38f9d7]";
+
+        break;
+      case "yellow":
+        gradient = "bg-gradient-to-br from-[#fa709a] to-[#fee140]";
+
+        break;
+      case "darkBlue":
+        gradient = "bg-gradient-to-br from-[#30cfd0] to-[#330867]";
+
+        break;
+    }
+    dispatch(setColorTheme(gradient));
+  }, [colorValue, dispatch]);
 
   return (
     <div>
@@ -90,9 +96,7 @@ const SideBar = ({ open, setOpen }) => {
         aria-label="Sidebar"
       >
         <div
-          className={`relative px-3 w-64 py-4 drop-shadow-md overflow-y-auto h-[93%] ${
-            colorTheme === "blue" ? "bg-[#191919]" : "bg-white"
-          } rounded-xl dark:bg-gray-800`}
+          className={`relative px-3 w-64 py-4 drop-shadow-md overflow-y-auto h-[93%] bg-white rounded-xl dark:bg-gray-800`}
         >
           {/* Logo */}
           <div className="w-full h-24 flex items-end">
@@ -113,10 +117,10 @@ const SideBar = ({ open, setOpen }) => {
               const active = isActive(pathname, item.links);
               const baseItem = "flex items-center p-2 rounded-lg transition";
               const inactive =
-                colorTheme === "blue"
-                  ? "text-white/90 hover:bg-gray-800"
+                colorValue === "blue"
+                  ? "text-gray/900 hover:bg-gray-100"
                   : "text-gray-900 hover:bg-gray-100";
-              const activeCls = `${gradient} text-white shadow`;
+              const activeCls = `${colorTheme} text-white shadow`;
 
               return (
                 <li key={item.links}>
@@ -136,38 +140,34 @@ const SideBar = ({ open, setOpen }) => {
 
           {/* Color picker */}
           <div className="absolute bottom-8 left-0 right-0">
-            <div
-              className={`${
-                colorTheme === "blue" ? "text-white" : "text-gray-900"
-              } ms-3 p-2 mt-4`}
-            >
-              Colors
+            <div className={`m-3 rounded-lg p-2 mt-4 ${colorTheme}`}>
+              <p className=" text-white ">Colors</p>
             </div>
             <div className="flex flex-row ms-3 gap-5">
               <button
                 aria-label="Blue theme"
                 className="bg-gradient-to-br from-[#49a3f1] to-[#1A73E8] w-6 h-6 rounded-full"
-                onClick={() => dispatch(setColorTheme("blue"))}
+                onClick={() => dispatch(setColorValue("blue"))}
               />
               <button
                 aria-label="Pink theme"
                 className="bg-gradient-to-br from-[#f093fb] to-[#f5576c] w-6 h-6 rounded-full"
-                onClick={() => dispatch(setColorTheme("pink"))}
+                onClick={() => dispatch(setColorValue("pink"))}
               />
               <button
                 aria-label="Green theme"
                 className="bg-gradient-to-br from-[#43e97b] to-[#38f9d7] w-6 h-6 rounded-full"
-                onClick={() => dispatch(setColorTheme("green"))}
+                onClick={() => dispatch(setColorValue("green"))}
               />
               <button
                 aria-label="Yellow theme"
                 className="bg-gradient-to-br from-[#fa709a] to-[#fee140] w-6 h-6 rounded-full"
-                onClick={() => dispatch(setColorTheme("yellow"))}
+                onClick={() => dispatch(setColorValue("yellow"))}
               />
               <button
                 aria-label="Dark blue theme"
                 className="bg-gradient-to-br from-[#30cfd0] to-[#330867] w-6 h-6 rounded-full"
-                onClick={() => dispatch(setColorTheme("darkBlue"))}
+                onClick={() => dispatch(setColorValue("darkBlue"))}
               />
             </div>
           </div>

@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaClipboardList } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import Highcharts from "highcharts";
+import { color } from "../utils/colorScheme";
+import Chart from "./Chart";
+import SummaryChart from "./SummaryChart";
 
 const records = [
   "2020 Census",
@@ -22,7 +26,7 @@ const records = [
   "Vehicle Location",
 ];
 const Tables = () => {
-  const { excelData, tableContent, groupData } = useSelector(
+  const { excelData, tableContent, groupData, colorTheme } = useSelector(
     (state) => state.excel
   );
 
@@ -42,9 +46,39 @@ const Tables = () => {
 
   return (
     <>
-      <div className="flex flex-row items-center mt-4 p-2 -mb-1 gap-2 justify-start max-w-60 bg-white rounded-t-lg">
-        <label className=" ">{tableContent}</label>
-        <FaClipboardList color="blacl" />
+      <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 ">
+        <div
+          className="w-full md:w-1/2 h-96 flex justify-center "
+          style={{ flexDirection: "column" }}
+        >
+          <div
+            className={`flex flex-row p-2  gap-2  max-w-60 ${colorTheme} rounded-t-lg items-center`}
+          >
+            <label className="text-white">{tableContent}</label>
+            <FaClipboardList color="white" />
+          </div>
+          <Chart table={table} />
+        </div>
+
+        <div
+          className="w-full md:w-1/2 h-96 flex justify-center "
+          style={{ flexDirection: "column" }}
+        >
+          <div
+            className={`flex flex-row p-2  gap-2  max-w-60 ${colorTheme} rounded-t-lg items-center`}
+          >
+            <label className="text-white">summary</label>
+            <FaClipboardList color="white" />
+          </div>
+          <SummaryChart />
+        </div>
+      </div>
+
+      <div
+        className={`flex flex-row items-center mt-4 p-2 -mb-1 gap-2 justify-start max-w-60 ${colorTheme} rounded-t-lg`}
+      >
+        <label className="text-white">{tableContent}</label>
+        <FaClipboardList color="white" />
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -105,7 +139,7 @@ const Tables = () => {
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+            className={`px-3 py-1 ${colorTheme} text-white rounded disabled:opacity-50`}
           >
             Prev
           </button>
@@ -117,7 +151,7 @@ const Tables = () => {
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+            className={`px-3 py-1 ${colorTheme} text-white rounded disabled:opacity-50`}
           >
             Next
           </button>

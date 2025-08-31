@@ -10,8 +10,6 @@ const Cards = () => {
   );
   const dispatch = useDispatch();
 
-  console.log(tableContent);
-
   const gradients = [
     "from-[#49a3f1] to-[#1A73E8]",
     "from-[#f093fb] to-[#f5576c]",
