@@ -36,7 +36,7 @@ const Profile = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex justify-center gap-6 mt-6">
+        <div className="flex justify-center flex-wrap gap-6 mt-6">
           <a
             href="https://www.linkedin.com/in/nilesh-mourya-16006027b/"
             target="_blank"

@@ -135,27 +135,27 @@ const Tables = () => {
               ))}
           </tbody>
         </table>
-        <div className="flex justify-center items-center gap-2 mt-4">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-            disabled={currentPage === 1}
-            className={`px-3 py-1 ${colorTheme} text-white rounded disabled:opacity-50`}
-          >
-            Prev
-          </button>
+      </div>
+      <div className="flex justify-center items-center gap-2 mt-4">
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-3 py-1 ${colorTheme} text-white rounded disabled:opacity-50`}
+        >
+          Prev
+        </button>
 
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
 
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className={`px-3 py-1 ${colorTheme} text-white rounded disabled:opacity-50`}
-          >
-            Next
-          </button>
-        </div>
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className={`px-3 py-1 ${colorTheme} text-white rounded disabled:opacity-50`}
+        >
+          Next
+        </button>
       </div>
     </>
   );
