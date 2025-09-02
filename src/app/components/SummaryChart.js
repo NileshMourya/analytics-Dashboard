@@ -89,7 +89,7 @@ const SummaryChart = () => {
           rules: [
             {
               condition: {
-                maxWidth: 300,
+                maxWidth: 500,
               },
               chartOptions: {
                 plotOptions: {

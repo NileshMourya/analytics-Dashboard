@@ -7,6 +7,7 @@ import Loader from "./Loader";
 
 const Chart = ({ table }) => {
   const { tableContent, colorTheme } = useSelector((state) => state.excel);
+
   const chartData = useMemo(() => {
     const cityCounts = {};
     table?.forEach((item) => {

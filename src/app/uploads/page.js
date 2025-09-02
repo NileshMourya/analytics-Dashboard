@@ -24,7 +24,7 @@ const Page = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gray-50">
-      <div className="p-8 w-2/5 h-72 flex flex-col justify-center items-center border-2 border-dashed border-cyan-400 rounded-2xl shadow-md hover:shadow-lg transition duration-300 ease-in-out bg-white">
+      <div className="p-8 md:w-2/5 h-72 flex flex-col justify-center items-center border-2 border-dashed border-cyan-400 rounded-2xl shadow-md hover:shadow-lg transition duration-300 ease-in-out bg-white">
         <input
           type="file"
           id="myFile"
